@@ -1,0 +1,29 @@
+{
+  "name": "redis-pooling",
+  "version": "1.0.0",
+  "description": "Nodejs module for creating redis connection pool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lordmelique/redis-pooling.git"
+  },
+  "keywords": [
+    "redis",
+    "pooling",
+    "connection",
+    "limit"
+  ],
+  "author": "Melik Karapetyan",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/lordmelique/redis-pooling/issues"
+  },
+  "homepage": "https://github.com/lordmelique/redis-pooling#readme",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "node-redis": "^0.1.7"
+  }
+}
