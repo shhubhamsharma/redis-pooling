@@ -7,19 +7,6 @@ var bluebird = require('bluebird');
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
-var config = {
-    maxPoolSize: 5,
-    credentials: {
-        host: "192.168.1.112",//"127.0.0.1",
-        port: "6379",
-        dbs: {
-            auth: 'auth',
-            cache: 'cache',
-            track: 'track'
-        }
-    }
-};
-
 var RedisPool = function (config) {
     var connections = [];
     this.methods = {
@@ -167,4 +154,4 @@ RedisPool.prototype.makeId = function () {
 
 };
 
-module.exports = new RedisPool(config);
+module.exports = RedisPool;
