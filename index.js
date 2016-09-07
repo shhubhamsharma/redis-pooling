@@ -1,21 +1,28 @@
 /**
  * Created by melontron on 9/7/16.
  */
-var redis = require('node-redis');
+var redis = require('redis');
 var bluebird = require('bluebird');
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
+
 var RedisPool = function (config) {
     var connections = [];
+    //TODO hset test
     this.methods = {
-        "set" : 2,
-        "get" : 2,
-        "incr": 1
+        "set": 2,
+        "get": 1,
+        "incr": 1,
+        "expire": 2,
+        "expireat": 2
     };
-
-    this.config = config;
+    this.config = {
+        maxPoolSize: config.maxPoolSize || 5,
+        credentials: config.credentials
+    };
+    var _this = this;
     this.getConnection = function () {
         if (connections.length < this.config.maxPoolSize) {
             connections.push({
@@ -27,7 +34,7 @@ var RedisPool = function (config) {
         } else {
             var connectionWithMinUsers = connections[0];
             var min = connections[0].inUse;
-            this.connections.map(function (connection) {
+            connections.map(function (connection) {
                 if (connection.inUse < min) {
                     min = connection.inUse;
                     connectionWithMinUsers = connection;
@@ -40,33 +47,30 @@ var RedisPool = function (config) {
 
     this.init = function () {
         var methods = Object.keys(this.methods);
-        var _this = this;
         methods.forEach(function (method) {
-            switch( _this.methods[method] ){
-                case 1:{
-                    this[method] = function (key, callback) {
-                        _this.call(method, 1, key, null, callback);
-                    };
+            switch (_this.methods[method]) {
+                case 1:
+                {
+                    _this[method] = function (key, callback) {
+                        return _this.callMethod(method, 1, key, null, callback);
+                    }
                     break;
                 }
-                case 2:{
-                    this[method] = function (key, value, callback) {
-                        _this.call(method, 2, key, value, callback);
-                    };
+                case 2:
+                {
+                    _this[method] = function (key, value, callback) {
+                        return _this.callMethod(method, 2, key, value, callback);
+                    }
                     break;
                 }
-                default:{
+                default:
+                {
                     break;
                 }
             }
         })
     };
-    
-    this.abandonConnection = function (connection) {
-        if (--connection.inUse == 0) {
-            this.updateConnections();
-        }
-    };
+
 
     this.updateConnections = function () {
         var counter = 0;
@@ -83,71 +87,78 @@ var RedisPool = function (config) {
         }
     };
 
-    this.init();
-};
+    this.callMethod = function (method, type, key, value, callback) {
+        var conn = _this.getConnection();
+        var client = conn.client;
+        if (typeof callback == "undefined") {
 
-
-RedisPool.prototype.call = function (method, type, key, value, callback) {
-    var conn = this.getConnection();
-    var client = conn.client;
-    var _this = this;
-    if (typeof callback == "undefined") {
-
-        switch (type) {
-            case 1:
-            {
-                return new Promise(function (resolve, reject) {
-
-                    client[method + 'Async'](key).then(function (val) {
-                        _this.abandonConnection(conn);
-                        resolve(val)
-                    }).catch(reject);
-                });
-            }
-            case 2:
-            {
-                return new Promise(function (resolve, reject) {
-                    client[method + 'Async'](key, value).then(function (val) {
-                        _this.abandonConnection(conn);
-                        resolve(val)
-                    }).catch(reject);
-                })
-
-            }
-        }
-    } else {
-        if (typeof  callback != "function") {
-            throw new Error('TypeError: callback should be a function');
-        } else {
             switch (type) {
                 case 1:
                 {
-                    client[method](key, function (err, result) {
-                        _this.abandonConnection(conn);
-                        callback(err, result);
+                    return new Promise(function (resolve, reject) {
+                        client[method + 'Async'](key).then(function (val) {
+                            _this.abandonConnection(conn);
+                            resolve(val)
+                        }).catch(reject);
                     });
-                    break;
                 }
                 case 2:
                 {
-                    client[method](key, value, function (err, result) {
-                        _this.abandonConnection(conn);
-                        callback(err, result);
-                    });
-                    break;
+
+                    return new Promise(function (resolve, reject) {
+                        client[method + 'Async'](key, value).then(function (val) {
+                            _this.abandonConnection(conn);
+                            resolve(val)
+                        }).catch(reject);
+                    })
+
                 }
             }
+        } else {
+            if (typeof  callback != "function") {
+                throw new Error('TypeError: callback should be a function');
+            } else {
+                switch (type) {
+                    case 1:
+                    {
+                        client[method](key, function (err, result) {
+                            _this.abandonConnection(conn);
+                            callback(err, result);
+                        });
+                        break;
+                    }
+                    case 2:
+                    {
+                        client[method](key, value, function (err, result) {
+                            _this.abandonConnection(conn);
+                            callback(err, result);
+                        });
+                        break;
+                    }
+                }
 
+            }
         }
-    }
+    };
+
+    this.abandonConnection = function (connection) {
+        if (--connection.inUse == 0) {
+            _this.updateConnections();
+        }
+    };
+
+
+    this.init();
+
 };
+
 
 RedisPool.prototype.makeId = function () {
 
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    for (var i = 0; i < 10; i++)
+    for (var i = 0; i < 15; i++)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
