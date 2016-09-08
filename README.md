@@ -71,15 +71,83 @@ client.set(key, value).then(function(data){
 ```
 
 ##Currently available methods
-`set` - for setting values
+`set` 
 
-`get` - for getting values
+`get` 
 
-`incr` - for incrementing
+`incr` 
 
-`expire` - set expiration to key
+`expire` 
 
-`expireat` - set expiration at
+`expireat` 
+
+`auth`
+
+`append`
+
+`dbsize`
+
+`del`
+
+`dump`
+
+`echo`
+
+`exists`
+
+`hdel`
+
+`hexists`
+
+`hget`
+
+`hgetall`
+
+`hincrby`
+
+`hincrbyfloat`
+
+`hkeys`
+
+`hlen`
+
+`hmget`
+
+`hmset`
+
+`hset`
+
+`hsetnx`
+
+`hstrlen`
+
+`hvals`
+
+`incrby`
+
+`incrbyfloat`
+
+`keys`
+
+`lindex`
+
+`lrange`
+
+`lrem`
+
+`lset`
+
+`ltrim`
+
+`randomkey`
+
+`rename`
+
+`renamenx`
+
+`setnx`
+
+`ttl`
 
 
 ##config object
