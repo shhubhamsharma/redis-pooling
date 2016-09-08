@@ -1,6 +1,6 @@
 {
   "name": "redis-pooling",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Nodejs module for creating redis connection pool",
   "main": "index.js",
   "scripts": {

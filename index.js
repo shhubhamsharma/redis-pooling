@@ -4,6 +4,7 @@
 var redis = require('redis');
 var bluebird = require('bluebird');
 
+
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
@@ -53,14 +54,14 @@ var RedisPool = function (config) {
                 {
                     _this[method] = function (key, callback) {
                         return _this.callMethod(method, 1, key, null, callback);
-                    }
+                    };
                     break;
                 }
                 case 2:
                 {
                     _this[method] = function (key, value, callback) {
                         return _this.callMethod(method, 2, key, value, callback);
-                    }
+                    };
                     break;
                 }
                 default:
@@ -73,16 +74,11 @@ var RedisPool = function (config) {
 
 
     this.updateConnections = function () {
-        var counter = 0;
+
         for (var i = 0; i < connections.length; i++) {
             if (connections[i].inUse == 0) {
-                counter++;
-            }
-
-            if (counter > 1) {
                 connections[i].client.quit();
                 connections.splice(i, 1);
-                i--;
             }
         }
     };
