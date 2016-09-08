@@ -1,6 +1,6 @@
 {
   "name": "redis-pooling",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Nodejs module for creating redis connection pool",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,11 @@
     "redis",
     "pooling",
     "connection",
-    "limit"
+    "limit",
+    "pool",
+    "connections",
+    "multiple",
+    "clients"
   ],
   "author": "Melik Karapetyan",
   "license": "GPL-3.0",
