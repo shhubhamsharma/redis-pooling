@@ -1,5 +1,5 @@
 #Redis Pooling - A NodeJs module for creating redis connection pool
-[Redis Pooling - v1.0.5](https://npmjs.com/package/redis-pooling)
+[Redis Pooling - v1.0.6](https://npmjs.com/package/redis-pooling)
 
 This is a simple module for creating redis connection pool, it depends on NodeJS [redis module](https://github.com/NodeRedis/node_redis) and commands are almost the same
 besides it allows you to set maximum number of connections and distribute requests equally on each of them. 
@@ -16,18 +16,16 @@ you can use `npm` for installing this module
 
 ####Configure
 All you need is to require module and give it config object which should should have 'maxPoolSize' and 'credentials'
-properties.
+properties. (note that client is singleton object)
 
 ```
-var redisPool = require('redis-pooling');
-    var client = new redisPool({
+var client = require('redis-pooling')({
         maxPoolSize: 10,
         credentials: {
             host: "127.0.0.1",
             port: "6379"
         }
     });
-
 ``` 
    
     

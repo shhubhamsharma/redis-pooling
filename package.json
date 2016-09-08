@@ -1,6 +1,6 @@
 {
   "name": "redis-pooling",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Nodejs module for creating redis connection pool",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/lordmelique/redis-pooling#readme",
   "dependencies": {
-    "bluebird": "^3.4.6",
-    "node-redis": "^0.1.7"
+    "bluebird": "^3.4.6"
   }
 }
