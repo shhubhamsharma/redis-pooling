@@ -50,7 +50,10 @@ var RedisPool = function (config) {
         "rename": 2,
         "renamenx": 2,
         "setnx": 2,
-        "ttl": 1
+        "ttl": 1,
+	"sadd": 2,
+        "smembers":1,
+        "sismember": 2,
     };
     this.config = {
         maxPoolSize: config.maxPoolSize || 5,
