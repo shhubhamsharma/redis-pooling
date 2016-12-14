@@ -103,7 +103,7 @@ var RedisPool = function (config) {
                     break;
                 }
                 case 3:{
-                    _this[method] = function (key, value, field, callback) {
+                    _this[method] = function (key, field, value, callback) {
                         return _this.callMethod(method, 3, key, value, field, callback);
                     }
                     break;
