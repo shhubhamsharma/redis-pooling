@@ -51,6 +51,7 @@ var RedisPool = function (config) {
         "renamenx": 2,
         "setnx": 2,
         "ttl": 1,
+        "setex" : 3,
 	"sadd": 2,
         "smembers":1,
         "sismember": 2,
@@ -230,14 +231,10 @@ RedisPool.prototype.makeId = function () {
 var clientCreated = false;
 var client;
 module.exports = function (config, createNew) {
-
     config = (typeof config == "undefined") ? {credentials: {}} : config;
-
     if( clientCreated == false || createNew == true){
-        console.log("Redis Connection Pool created successfully...");
         client = new RedisPool(config);
         clientCreated = true;
     }
-
     return client;
 };

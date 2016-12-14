@@ -1,15 +1,70 @@
 {
-  "name": "redis-pooling",
-  "version": "1.0.7",
+  "_args": [
+    [
+      {
+        "raw": "redis-pooling@^1.0.6",
+        "scope": null,
+        "escapedName": "redis-pooling",
+        "name": "redis-pooling",
+        "rawSpec": "^1.0.6",
+        "spec": ">=1.0.6 <2.0.0",
+        "type": "range"
+      },
+      "/home/melontron/Projects/sticker-market"
+    ]
+  ],
+  "_from": "redis-pooling@>=1.0.6 <2.0.0",
+  "_id": "redis-pooling@1.0.7",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/redis-pooling",
+  "_nodeVersion": "6.4.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/redis-pooling-1.0.7.tgz_1475600235464_0.29192702542059124"
+  },
+  "_npmUser": {
+    "name": "lordmelique",
+    "email": "melik.developer@gmail.com"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "redis-pooling@^1.0.6",
+    "scope": null,
+    "escapedName": "redis-pooling",
+    "name": "redis-pooling",
+    "rawSpec": "^1.0.6",
+    "spec": ">=1.0.6 <2.0.0",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/redis-pooling/-/redis-pooling-1.0.7.tgz",
+  "_shasum": "9c03ba84730c9dd4db41d1214f081d1e35ab1d8b",
+  "_shrinkwrap": null,
+  "_spec": "redis-pooling@^1.0.6",
+  "_where": "/home/melontron/Projects/sticker-market",
+  "author": {
+    "name": "Melik Karapetyan"
+  },
+  "bugs": {
+    "url": "https://github.com/lordmelique/redis-pooling/issues"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "redis": "^2.6.2"
+  },
   "description": "Nodejs module for creating redis connection pool",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "9c03ba84730c9dd4db41d1214f081d1e35ab1d8b",
+    "tarball": "https://registry.npmjs.org/redis-pooling/-/redis-pooling-1.0.7.tgz"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lordmelique/redis-pooling.git"
-  },
+  "gitHead": "096585bfa4e397780599970776d2e464ad203d5b",
+  "homepage": "https://github.com/lordmelique/redis-pooling#readme",
   "keywords": [
     "redis",
     "pooling",
@@ -20,14 +75,23 @@
     "multiple",
     "clients"
   ],
-  "author": "Melik Karapetyan",
   "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/lordmelique/redis-pooling/issues"
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "lordmelique",
+      "email": "melik.developer@gmail.com"
+    }
+  ],
+  "name": "redis-pooling",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lordmelique/redis-pooling.git"
   },
-  "homepage": "https://github.com/lordmelique/redis-pooling#readme",
-  "dependencies": {
-    "bluebird": "^3.4.6",
-    "redis": "^2.6.2"
-  }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.8"
 }
