@@ -127,6 +127,7 @@ var RedisPool = function (config) {
             if (counter > 1) {
                 connections[i].client.quit();
                 connections.splice(i, 1);
+                counter--;
                 i--;
             }
         }
