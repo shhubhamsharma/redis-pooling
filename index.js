@@ -35,6 +35,7 @@ var RedisPool = function (config) {
         "hmget": 2,
         "hmset": 3,
         "hset": 3,
+	 "on":2,
         "hsetnx": 3,
         "hstrlen": 2,
         "hvals": 1,
