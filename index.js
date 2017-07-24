@@ -23,6 +23,7 @@ var RedisPool = function (config) {
         "del": 1,
         "dump": 1,
         "echo": 1,
+        "on":2,
         "exists": 1,
         "hdel": 2,
         "hexists": 1,
